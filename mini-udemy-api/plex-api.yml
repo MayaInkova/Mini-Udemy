@@ -1,0 +1,67 @@
+  openapi: 3.0.3
+  info:
+    title: Mini Udemy API
+    version: 1.0.0
+    description: Начален контракт за Mini Udemy проект.
+
+  servers:
+    - url: http://localhost:8080
+      description: Local Server
+
+  tags:
+    - name: Courses
+
+  paths:
+    /api/courses:
+      get:
+        tags:
+          - Courses
+        summary: List with very courses
+        operationId: getCourses
+        responses:
+          '200':
+            description: Successful
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CourseDto'
+
+      post:
+        tags:
+          - Courses
+        summary: Create new course
+        operationId: createCourse
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseDto'
+        responses:
+          '201':
+            description: Course is create
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CourseDto'
+
+  components:
+    schemas:
+      CourseDto:
+        type: object
+        required:
+          - title
+        properties:
+          id:
+            type: integer
+            format: int64
+          title:
+            type: string
+            minLength: 3
+          description:
+            type: string
+          price:
+            type: number
+            format: double

@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: plex-mssql
+    environment:
+      ACCEPT_EULA: "1"
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd1"
+    ports:
+      - "1433:1433"
+    volumes:
+      - plex_mssql_data:/var/opt/mssql
+
+volumes:
+  plex_mssql_data:
