@@ -6,7 +6,7 @@ services:
     container_name: plex-mssql
     environment:
       ACCEPT_EULA: "1"
-      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd1"
+      MSSQL_SA_PASSWORD: "Password123!"
     ports:
       - "1433:1433"
     volumes:
