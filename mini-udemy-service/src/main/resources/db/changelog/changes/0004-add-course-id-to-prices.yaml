@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0004-01-add-course-id-to-prices
+      author: maya
+      changes:
+        - addColumn:
+            tableName: prices
+            columns:
+              - column:
+                  name: course_id
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 0004-02-add-fk-price-course
+      author: maya
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: prices
+            baseColumnNames: course_id
+            referencedTableName: courses
+            referencedColumnNames: id
+            constraintName: fk_price_course
