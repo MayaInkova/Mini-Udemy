@@ -1,3 +1,7 @@
+com\udemy\mini\model\CourseDto.class
+com\udemy\mini\model\CourseResponseDto.class
+com\udemy\mini\model\StudentDto.class
+com\udemy\mini\api\SystemApi.class
 com\udemy\mini\api\CoursesApi.class
-com\udemy\mini\model\CourseDtoDto.class
 com\udemy\mini\api\ApiUtil.class
+com\udemy\mini\model\CourseCreateRequestDto.class
