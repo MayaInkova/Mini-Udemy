@@ -5,7 +5,9 @@
  */
 package com.udemy.mini.api;
 
-import com.udemy.mini.model.CourseDtoDto;
+import com.udemy.mini.model.CourseCreateRequestDto;
+import com.udemy.mini.model.CourseDto;
+import com.udemy.mini.model.CourseResponseDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -32,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-02T01:08:37.081562700+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-02T19:45:29.256938200+03:00[Europe/Sofia]")
 @Validated
 @Tag(name = "Courses", description = "the Courses API")
 public interface CoursesApi {
@@ -44,7 +46,7 @@ public interface CoursesApi {
     /**
      * POST /api/courses : Create new course
      *
-     * @param courseDtoDto  (required)
+     * @param courseCreateRequestDto  (required)
      * @return Course is create (status code 201)
      */
     @Operation(
@@ -53,7 +55,7 @@ public interface CoursesApi {
         tags = { "Courses" },
         responses = {
             @ApiResponse(responseCode = "201", description = "Course is create", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseDtoDto.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
             })
         }
     )
@@ -64,13 +66,13 @@ public interface CoursesApi {
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<CourseDtoDto> createCourse(
-        @Parameter(name = "CourseDtoDto", description = "", required = true) @Valid @RequestBody CourseDtoDto courseDtoDto
+    default ResponseEntity<CourseResponseDto> createCourse(
+        @Parameter(name = "CourseCreateRequestDto", description = "", required = true) @Valid @RequestBody CourseCreateRequestDto courseCreateRequestDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"price\" : 6.027456183070403, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }";
+                    String exampleString = "{ \"data\" : { \"price\" : 6.027456183070403, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -85,6 +87,10 @@ public interface CoursesApi {
      * GET /api/courses : List with very courses
      *
      * @return Successful (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Internal Server Error (status code 500)
      */
     @Operation(
         operationId = "getCourses",
@@ -92,8 +98,12 @@ public interface CoursesApi {
         tags = { "Courses" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CourseDtoDto.class)))
-            })
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CourseDto.class)))
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )
     @RequestMapping(
@@ -102,7 +112,7 @@ public interface CoursesApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<List<CourseDtoDto>> getCourses(
+    default ResponseEntity<List<CourseDto>> getCourses(
         
     ) {
         getRequest().ifPresent(request -> {
