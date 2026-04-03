@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("CourseResponse")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-02T19:45:29.256938200+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-03T23:13:45.514298400+03:00[Europe/Sofia]")
 public class CourseResponseDto {
 
   private CourseDto data;

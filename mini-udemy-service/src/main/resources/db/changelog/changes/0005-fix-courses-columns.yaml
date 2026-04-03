@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0005-add-missing-columns-to-courses
+      author: maya
+      changes:
+        - addColumn:
+            tableName: courses
+            columns:
+              - column:
+                  name: description
+                  type: nvarchar(max)
+              - column:
+                  name: price
+                  type: decimal(18, 2)
