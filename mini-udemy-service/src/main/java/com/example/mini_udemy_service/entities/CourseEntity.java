@@ -19,7 +19,9 @@ public class CourseEntity {
 
     private  String title;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private TeacherEntity teacher;
+    private  String description;
+
+    private  double price;
+
+
 }

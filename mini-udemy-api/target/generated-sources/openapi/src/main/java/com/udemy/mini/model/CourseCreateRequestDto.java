@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("CourseCreateRequest")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-02T19:45:29.256938200+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-04T10:32:16.338552+03:00[Europe/Sofia]")
 public class CourseCreateRequestDto {
 
   private String title;
