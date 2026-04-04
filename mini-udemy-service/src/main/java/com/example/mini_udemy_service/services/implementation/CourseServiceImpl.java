@@ -18,7 +18,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
-    private final TeacherRepository teacherRepository;
     private final CourseMapper courseMapper;
 
     @Override
