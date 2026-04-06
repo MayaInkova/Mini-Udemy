@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0010-remove-course-id-from-prices
+      author: maya
+      changes:
+        - dropColumn:
+            tableName: prices
+            columnName: course_id
