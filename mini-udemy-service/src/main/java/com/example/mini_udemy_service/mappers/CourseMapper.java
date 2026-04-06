@@ -13,11 +13,12 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
-    CourseEntity toEntity (CourseCreateRequestDto dto);
+    @Mapping(target = "price", ignore = true)
+    @Mapping(target = "teacher", ignore = true)
+    CourseEntity toEntity(CourseCreateRequestDto dto);
 
+    CourseDto toCourseDto(CourseEntity entity);
 
-    @Mapping(source = ".", target = "data")
-    CourseResponseDto toDto (CourseEntity entity);
-
-
+    @Mapping(source = "entity", target = "data")
+    CourseResponseDto toDto(CourseEntity entity);
 }

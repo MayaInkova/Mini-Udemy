@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0007-add-index-to-courses
+      author: maya
+      changes:
+        - createIndex:
+            indexName: ind_course_teacher
+            tableName: courses
+            columns:
+              - column:
+                  name: teacher_id
+        - createIndex:
+            indexName: inx_course_title
+            tableName: courses
+            columns:
+              - column:
+                  name: title
+

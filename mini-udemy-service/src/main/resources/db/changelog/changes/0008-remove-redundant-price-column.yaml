@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 000-remove-redundant-price-column
+      author: maya
+      changes:
+        - dropColumn:
+            tableName: courses
+            columnName: price

@@ -5,8 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import java.time.OffsetDateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -18,23 +16,22 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * StudentDto
+ * TeacherDto
  */
 
-@JsonTypeName("Student")
+@JsonTypeName("Teacher")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T17:08:25.399883800+03:00[Europe/Sofia]")
-public class StudentDto {
+public class TeacherDto {
 
   private Long id;
 
-  private String username;
+  private String fullName;
 
   private String email;
 
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime createdAt;
+  private String bio;
 
-  public StudentDto id(Long id) {
+  public TeacherDto id(Long id) {
     this.id = id;
     return this;
   }
@@ -54,27 +51,27 @@ public class StudentDto {
     this.id = id;
   }
 
-  public StudentDto username(String username) {
-    this.username = username;
+  public TeacherDto fullName(String fullName) {
+    this.fullName = fullName;
     return this;
   }
 
   /**
-   * Get username
-   * @return username
+   * Get fullName
+   * @return fullName
   */
   
-  @Schema(name = "username", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("username")
-  public String getUsername() {
-    return username;
+  @Schema(name = "fullName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("fullName")
+  public String getFullName() {
+    return fullName;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
   }
 
-  public StudentDto email(String email) {
+  public TeacherDto email(String email) {
     this.email = email;
     return this;
   }
@@ -94,24 +91,24 @@ public class StudentDto {
     this.email = email;
   }
 
-  public StudentDto createdAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
+  public TeacherDto bio(String bio) {
+    this.bio = bio;
     return this;
   }
 
   /**
-   * Get createdAt
-   * @return createdAt
+   * Get bio
+   * @return bio
   */
-  @Valid 
-  @Schema(name = "createdAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("createdAt")
-  public OffsetDateTime getCreatedAt() {
-    return createdAt;
+  
+  @Schema(name = "bio", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("bio")
+  public String getBio() {
+    return bio;
   }
 
-  public void setCreatedAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
+  public void setBio(String bio) {
+    this.bio = bio;
   }
 
   @Override
@@ -122,26 +119,26 @@ public class StudentDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    StudentDto student = (StudentDto) o;
-    return Objects.equals(this.id, student.id) &&
-        Objects.equals(this.username, student.username) &&
-        Objects.equals(this.email, student.email) &&
-        Objects.equals(this.createdAt, student.createdAt);
+    TeacherDto teacher = (TeacherDto) o;
+    return Objects.equals(this.id, teacher.id) &&
+        Objects.equals(this.fullName, teacher.fullName) &&
+        Objects.equals(this.email, teacher.email) &&
+        Objects.equals(this.bio, teacher.bio);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, email, createdAt);
+    return Objects.hash(id, fullName, email, bio);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StudentDto {\n");
+    sb.append("class TeacherDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
+    sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    bio: ").append(toIndentedString(bio)).append("\n");
     sb.append("}");
     return sb.toString();
   }

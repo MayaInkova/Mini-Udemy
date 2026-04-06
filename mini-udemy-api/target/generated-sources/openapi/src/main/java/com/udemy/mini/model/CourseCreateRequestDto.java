@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.math.BigDecimal;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -20,14 +21,16 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("CourseCreateRequest")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-04T10:32:16.338552+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T17:08:25.399883800+03:00[Europe/Sofia]")
 public class CourseCreateRequestDto {
 
   private String title;
 
   private String description;
 
-  private Double price;
+  private BigDecimal priceAmount;
+
+  private Long teacherId;
 
   public CourseCreateRequestDto() {
     super();
@@ -36,8 +39,9 @@ public class CourseCreateRequestDto {
   /**
    * Constructor with only required parameters
    */
-  public CourseCreateRequestDto(String title) {
+  public CourseCreateRequestDto(String title, Long teacherId) {
     this.title = title;
+    this.teacherId = teacherId;
   }
 
   public CourseCreateRequestDto title(String title) {
@@ -80,24 +84,44 @@ public class CourseCreateRequestDto {
     this.description = description;
   }
 
-  public CourseCreateRequestDto price(Double price) {
-    this.price = price;
+  public CourseCreateRequestDto priceAmount(BigDecimal priceAmount) {
+    this.priceAmount = priceAmount;
     return this;
   }
 
   /**
-   * Get price
-   * @return price
+   * Get priceAmount
+   * @return priceAmount
   */
-  
-  @Schema(name = "price", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("price")
-  public Double getPrice() {
-    return price;
+  @Valid 
+  @Schema(name = "priceAmount", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("priceAmount")
+  public BigDecimal getPriceAmount() {
+    return priceAmount;
   }
 
-  public void setPrice(Double price) {
-    this.price = price;
+  public void setPriceAmount(BigDecimal priceAmount) {
+    this.priceAmount = priceAmount;
+  }
+
+  public CourseCreateRequestDto teacherId(Long teacherId) {
+    this.teacherId = teacherId;
+    return this;
+  }
+
+  /**
+   * Get teacherId
+   * @return teacherId
+  */
+  @NotNull 
+  @Schema(name = "teacherId", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("teacherId")
+  public Long getTeacherId() {
+    return teacherId;
+  }
+
+  public void setTeacherId(Long teacherId) {
+    this.teacherId = teacherId;
   }
 
   @Override
@@ -111,12 +135,13 @@ public class CourseCreateRequestDto {
     CourseCreateRequestDto courseCreateRequest = (CourseCreateRequestDto) o;
     return Objects.equals(this.title, courseCreateRequest.title) &&
         Objects.equals(this.description, courseCreateRequest.description) &&
-        Objects.equals(this.price, courseCreateRequest.price);
+        Objects.equals(this.priceAmount, courseCreateRequest.priceAmount) &&
+        Objects.equals(this.teacherId, courseCreateRequest.teacherId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(title, description, price);
+    return Objects.hash(title, description, priceAmount, teacherId);
   }
 
   @Override
@@ -125,7 +150,8 @@ public class CourseCreateRequestDto {
     sb.append("class CourseCreateRequestDto {\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    priceAmount: ").append(toIndentedString(priceAmount)).append("\n");
+    sb.append("    teacherId: ").append(toIndentedString(teacherId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

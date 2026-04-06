@@ -5,6 +5,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.udemy.mini.model.PriceDto;
+import com.udemy.mini.model.TeacherDto;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -20,7 +22,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Course")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-04T10:32:16.338552+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T17:08:25.399883800+03:00[Europe/Sofia]")
 public class CourseDto {
 
   private Long id;
@@ -29,7 +31,9 @@ public class CourseDto {
 
   private String description;
 
-  private Double price;
+  private PriceDto price;
+
+  private TeacherDto teacher;
 
   public CourseDto id(Long id) {
     this.id = id;
@@ -91,7 +95,7 @@ public class CourseDto {
     this.description = description;
   }
 
-  public CourseDto price(Double price) {
+  public CourseDto price(PriceDto price) {
     this.price = price;
     return this;
   }
@@ -100,15 +104,35 @@ public class CourseDto {
    * Get price
    * @return price
   */
-  
+  @Valid 
   @Schema(name = "price", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("price")
-  public Double getPrice() {
+  public PriceDto getPrice() {
     return price;
   }
 
-  public void setPrice(Double price) {
+  public void setPrice(PriceDto price) {
     this.price = price;
+  }
+
+  public CourseDto teacher(TeacherDto teacher) {
+    this.teacher = teacher;
+    return this;
+  }
+
+  /**
+   * Get teacher
+   * @return teacher
+  */
+  @Valid 
+  @Schema(name = "teacher", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("teacher")
+  public TeacherDto getTeacher() {
+    return teacher;
+  }
+
+  public void setTeacher(TeacherDto teacher) {
+    this.teacher = teacher;
   }
 
   @Override
@@ -123,12 +147,13 @@ public class CourseDto {
     return Objects.equals(this.id, course.id) &&
         Objects.equals(this.title, course.title) &&
         Objects.equals(this.description, course.description) &&
-        Objects.equals(this.price, course.price);
+        Objects.equals(this.price, course.price) &&
+        Objects.equals(this.teacher, course.teacher);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, title, description, price);
+    return Objects.hash(id, title, description, price, teacher);
   }
 
   @Override
@@ -139,6 +164,7 @@ public class CourseDto {
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    teacher: ").append(toIndentedString(teacher)).append("\n");
     sb.append("}");
     return sb.toString();
   }

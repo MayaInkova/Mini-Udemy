@@ -21,7 +21,12 @@ public class CourseEntity {
 
     private  String description;
 
-    private  double price;
+    @ManyToOne
+    @JoinColumn(name = "price_id")
+    private  PriceEntity price;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private  TeacherEntity teacher;
 
 }

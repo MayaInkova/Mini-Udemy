@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-04T10:32:16.338552+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T17:08:25.399883800+03:00[Europe/Sofia]")
 @Validated
 @Tag(name = "Courses", description = "the Courses API")
 public interface CoursesApi {
@@ -48,6 +48,10 @@ public interface CoursesApi {
      *
      * @param courseCreateRequestDto  (required)
      * @return Course is create (status code 201)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Internal Server Error (status code 500)
      */
     @Operation(
         operationId = "createCourse",
@@ -56,7 +60,11 @@ public interface CoursesApi {
         responses = {
             @ApiResponse(responseCode = "201", description = "Course is create", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
-            })
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )
     @RequestMapping(
@@ -72,7 +80,7 @@ public interface CoursesApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"price\" : 6.027456183070403, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
+                    String exampleString = "{ \"data\" : { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -118,7 +126,7 @@ public interface CoursesApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"price\" : 6.027456183070403, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"price\" : 6.027456183070403, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ]";
+                    String exampleString = "[ { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

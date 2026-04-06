@@ -75,12 +75,20 @@
               schema:
                 $ref: "#/components/schemas/CourseCreateRequest"
         responses:
-          '201':
+          "201":
             description: Course is create
             content:
               application/json:
                 schema:
                   $ref: "#/components/schemas/CourseResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
 
 
   components:
@@ -89,12 +97,46 @@
         name: id
         in: path
         required: true
-        description: Course identifier
+        description: "UrL Course ID"
+        schema:
+          type: integer
+          format: int64
+
+      TeacherId:
+        name: id
+        in: path
+        required: true
+        description: "UrL Teacher ID"
         schema:
           type: integer
           format: int64
 
     schemas:
+      Teacher:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          fullName:
+            type: string
+          email:
+            type: string
+          bio:
+            type: string
+
+      Price:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          amount:
+            type: number
+            format: double
+          currency:
+            type: string
+
       Course:
         type: object
         properties:
@@ -106,21 +148,39 @@
           description:
             type: string
           price:
-            type: number
-            format: double
+            $ref: '#/components/schemas/Price'
+          teacher:
+            $ref: '#/components/schemas/Teacher'
+
+      Enrollment:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          student:
+            $ref: '#/components/schemas/Student'
+          course:
+            $ref: '#/components/schemas/Course'
+          enrolledAt:
+            type: string
+            format: date-time
 
       CourseCreateRequest:
         type: object
         required:
           - title
+          - teacherId
         properties:
           title:
             type: string
           description:
             type: string
-          price:
+          priceAmount:
             type: number
-            format: double
+          teacherId:
+            type: integer
+            format: int64
 
       CourseResponse:
         type: object

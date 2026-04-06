@@ -25,5 +25,5 @@ public class StudentEntity {
     private String  email;
 
     @Column(name = "created_at")
-    private LocalDateTime createAd;
+    private LocalDateTime createdAt;
 }

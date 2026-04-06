@@ -19,12 +19,7 @@ public class PriceEntity {
     @Column(nullable = false)
     private java.math.BigDecimal amount;
 
-    @Column(length = 3)
+    @Column(nullable = false)
     private String currency;
-
-
-    @ManyToOne
-    @JoinColumn(name = "course_id") // ТОВА е правилното име на колоната в SQL
-    private CourseEntity course;
 
 }

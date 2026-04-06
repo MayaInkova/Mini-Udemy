@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0009-rename-price-column
+      author: maya
+      changes:
+        - addColumn:
+            tableName: courses
+            columns:
+              - column:
+                  name: price_id
+                  type: int
+              - addForeignKeyConstraint:
+                  baseTableName: courses
+                  baseColumnNames: price_id
+                  referencedTableName: prices
+                  referencedColumnNames: id
+                  constraintName: fk_courses_prices

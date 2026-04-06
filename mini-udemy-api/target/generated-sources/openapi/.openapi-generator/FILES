@@ -7,4 +7,7 @@ src/main/java/com/udemy/mini/api/SystemApi.java
 src/main/java/com/udemy/mini/model/CourseCreateRequestDto.java
 src/main/java/com/udemy/mini/model/CourseDto.java
 src/main/java/com/udemy/mini/model/CourseResponseDto.java
+src/main/java/com/udemy/mini/model/EnrollmentDto.java
+src/main/java/com/udemy/mini/model/PriceDto.java
 src/main/java/com/udemy/mini/model/StudentDto.java
+src/main/java/com/udemy/mini/model/TeacherDto.java

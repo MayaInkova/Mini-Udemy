@@ -11,3 +11,9 @@ databaseChangeLog:
       file: db/changelog/changes/0005-fix-courses-columns.yaml
   - include:
       file: db/changelog/changes/0006-make-teacher-id-optional.yaml
+  - include:
+      file: db/changelog/changes/0007-add-index-to-courses.yaml
+  - include:
+      file: db/changelog/changes/0008-remove-redundant-price-column.yaml
+  - include:
+      file: db/changelog/changes/0009-rename-price-column.yaml
