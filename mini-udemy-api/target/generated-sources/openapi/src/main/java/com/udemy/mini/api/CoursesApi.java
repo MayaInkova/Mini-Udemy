@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T17:08:25.399883800+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T18:58:22.775660600+03:00[Europe/Sofia]")
 @Validated
 @Tag(name = "Courses", description = "the Courses API")
 public interface CoursesApi {
