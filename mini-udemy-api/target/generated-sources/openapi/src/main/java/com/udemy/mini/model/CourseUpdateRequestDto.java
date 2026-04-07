@@ -17,12 +17,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * CourseCreateRequestDto
+ * CourseUpdateRequestDto
  */
 
-@JsonTypeName("CourseCreateRequest")
+@JsonTypeName("CourseUpdateRequest")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-08T00:12:04.302624200+03:00[Europe/Sofia]")
-public class CourseCreateRequestDto {
+public class CourseUpdateRequestDto {
 
   private String title;
 
@@ -32,19 +32,18 @@ public class CourseCreateRequestDto {
 
   private Long teacherId;
 
-  public CourseCreateRequestDto() {
+  public CourseUpdateRequestDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public CourseCreateRequestDto(String title, Long teacherId) {
+  public CourseUpdateRequestDto(String title) {
     this.title = title;
-    this.teacherId = teacherId;
   }
 
-  public CourseCreateRequestDto title(String title) {
+  public CourseUpdateRequestDto title(String title) {
     this.title = title;
     return this;
   }
@@ -64,7 +63,7 @@ public class CourseCreateRequestDto {
     this.title = title;
   }
 
-  public CourseCreateRequestDto description(String description) {
+  public CourseUpdateRequestDto description(String description) {
     this.description = description;
     return this;
   }
@@ -84,16 +83,17 @@ public class CourseCreateRequestDto {
     this.description = description;
   }
 
-  public CourseCreateRequestDto priceAmount(BigDecimal priceAmount) {
+  public CourseUpdateRequestDto priceAmount(BigDecimal priceAmount) {
     this.priceAmount = priceAmount;
     return this;
   }
 
   /**
    * Get priceAmount
+   * minimum: 0
    * @return priceAmount
   */
-  @Valid 
+  @Valid @DecimalMin("0") 
   @Schema(name = "priceAmount", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("priceAmount")
   public BigDecimal getPriceAmount() {
@@ -104,17 +104,17 @@ public class CourseCreateRequestDto {
     this.priceAmount = priceAmount;
   }
 
-  public CourseCreateRequestDto teacherId(Long teacherId) {
+  public CourseUpdateRequestDto teacherId(Long teacherId) {
     this.teacherId = teacherId;
     return this;
   }
 
   /**
-   * Get teacherId
+   * ID of the teacher if you want to change it
    * @return teacherId
   */
-  @NotNull 
-  @Schema(name = "teacherId", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "teacherId", description = "ID of the teacher if you want to change it", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("teacherId")
   public Long getTeacherId() {
     return teacherId;
@@ -132,11 +132,11 @@ public class CourseCreateRequestDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CourseCreateRequestDto courseCreateRequest = (CourseCreateRequestDto) o;
-    return Objects.equals(this.title, courseCreateRequest.title) &&
-        Objects.equals(this.description, courseCreateRequest.description) &&
-        Objects.equals(this.priceAmount, courseCreateRequest.priceAmount) &&
-        Objects.equals(this.teacherId, courseCreateRequest.teacherId);
+    CourseUpdateRequestDto courseUpdateRequest = (CourseUpdateRequestDto) o;
+    return Objects.equals(this.title, courseUpdateRequest.title) &&
+        Objects.equals(this.description, courseUpdateRequest.description) &&
+        Objects.equals(this.priceAmount, courseUpdateRequest.priceAmount) &&
+        Objects.equals(this.teacherId, courseUpdateRequest.teacherId);
   }
 
   @Override
@@ -147,7 +147,7 @@ public class CourseCreateRequestDto {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CourseCreateRequestDto {\n");
+    sb.append("class CourseUpdateRequestDto {\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    priceAmount: ").append(toIndentedString(priceAmount)).append("\n");

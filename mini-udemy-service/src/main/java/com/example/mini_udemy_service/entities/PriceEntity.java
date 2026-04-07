@@ -16,10 +16,13 @@ public class PriceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private java.math.BigDecimal amount;
 
-    @Column(nullable = false)
+    @Column
     private String currency;
+
+    @Column
+    private Double discount;
 
 }

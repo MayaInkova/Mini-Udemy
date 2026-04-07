@@ -6,8 +6,9 @@
 package com.udemy.mini.api;
 
 import com.udemy.mini.model.CourseCreateRequestDto;
-import com.udemy.mini.model.CourseDto;
+import com.udemy.mini.model.CourseListResponseDto;
 import com.udemy.mini.model.CourseResponseDto;
+import com.udemy.mini.model.CourseUpdateRequestDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T18:58:22.775660600+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-08T00:12:04.302624200+03:00[Europe/Sofia]")
 @Validated
 @Tag(name = "Courses", description = "the Courses API")
 public interface CoursesApi {
@@ -92,6 +93,45 @@ public interface CoursesApi {
 
 
     /**
+     * DELETE /api/courses/{id} : Delete course
+     * Deletes a course by id.
+     *
+     * @param id UrL Course ID (required)
+     * @return No Content (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+        operationId = "deleteCourse",
+        summary = "Delete course",
+        description = "Deletes a course by id.",
+        tags = { "Courses" },
+        responses = {
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/api/courses/{id}"
+    )
+    
+    default ResponseEntity<Void> deleteCourse(
+        @Parameter(name = "id", description = "UrL Course ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
      * GET /api/courses : List with very courses
      *
      * @return Successful (status code 200)
@@ -101,12 +141,12 @@ public interface CoursesApi {
      *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "getCourses",
+        operationId = "getAllCourses",
         summary = "List with very courses",
         tags = { "Courses" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CourseDto.class)))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseListResponseDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -120,13 +160,115 @@ public interface CoursesApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<List<CourseDto>> getCourses(
+    default ResponseEntity<CourseListResponseDto> getAllCourses(
         
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ]";
+                    String exampleString = "{ \"data\" : [ { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ] }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /api/courses/{id}
+     *
+     * @param id UrL Course ID (required)
+     * @return OK (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+        operationId = "getCourseId",
+        tags = { "Courses" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/api/courses/{id}",
+        produces = { "application/json" }
+    )
+    
+    default ResponseEntity<CourseResponseDto> getCourseId(
+        @Parameter(name = "id", description = "UrL Course ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"data\" : { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * PUT /api/courses/{id} : Update course
+     * Updates an existing course by id.
+     *
+     * @param id UrL Course ID (required)
+     * @param courseUpdateRequestDto Course update request. (required)
+     * @return OK (status code 200)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+        operationId = "updateCourse",
+        summary = "Update course",
+        description = "Updates an existing course by id.",
+        tags = { "Courses" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.PUT,
+        value = "/api/courses/{id}",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<CourseResponseDto> updateCourse(
+        @Parameter(name = "id", description = "UrL Course ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id,
+        @Parameter(name = "CourseUpdateRequestDto", description = "Course update request.", required = true) @Valid @RequestBody CourseUpdateRequestDto courseUpdateRequestDto
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"data\" : { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

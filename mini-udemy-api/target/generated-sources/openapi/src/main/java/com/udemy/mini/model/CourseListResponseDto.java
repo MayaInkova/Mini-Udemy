@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.udemy.mini.model.CourseDto;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -17,17 +20,37 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * CourseResponseDto
+ * CourseListResponseDto
  */
 
-@JsonTypeName("CourseResponse")
+@JsonTypeName("CourseListResponse")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-08T00:12:04.302624200+03:00[Europe/Sofia]")
-public class CourseResponseDto {
+public class CourseListResponseDto {
 
-  private CourseDto data;
+  @Valid
+  private List<@Valid CourseDto> data = new ArrayList<>();
 
-  public CourseResponseDto data(CourseDto data) {
+  public CourseListResponseDto() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public CourseListResponseDto(List<@Valid CourseDto> data) {
     this.data = data;
+  }
+
+  public CourseListResponseDto data(List<@Valid CourseDto> data) {
+    this.data = data;
+    return this;
+  }
+
+  public CourseListResponseDto addDataItem(CourseDto dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
@@ -35,14 +58,14 @@ public class CourseResponseDto {
    * Get data
    * @return data
   */
-  @Valid 
-  @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Valid 
+  @Schema(name = "data", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("data")
-  public CourseDto getData() {
+  public List<@Valid CourseDto> getData() {
     return data;
   }
 
-  public void setData(CourseDto data) {
+  public void setData(List<@Valid CourseDto> data) {
     this.data = data;
   }
 
@@ -54,8 +77,8 @@ public class CourseResponseDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CourseResponseDto courseResponse = (CourseResponseDto) o;
-    return Objects.equals(this.data, courseResponse.data);
+    CourseListResponseDto courseListResponse = (CourseListResponseDto) o;
+    return Objects.equals(this.data, courseListResponse.data);
   }
 
   @Override
@@ -66,7 +89,7 @@ public class CourseResponseDto {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CourseResponseDto {\n");
+    sb.append("class CourseListResponseDto {\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
