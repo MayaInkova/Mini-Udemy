@@ -22,8 +22,5 @@ public class StudentEntity {
     @Column(name = "username", nullable = false)
     private String username;
 
-    private String  email;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private String email;
 }

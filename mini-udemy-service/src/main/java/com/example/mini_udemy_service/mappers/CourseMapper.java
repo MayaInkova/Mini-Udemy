@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
-@Mapper(componentModel = SPRING)
+@Mapper(componentModel = SPRING, uses = {PriceMapper.class, TeacherMapper.class})
 public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)

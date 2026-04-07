@@ -44,16 +44,14 @@
         tags:
           - Courses
         summary: List with very courses
-        operationId: getCourses
+        operationId: getAllCourses
         responses:
           "200":
             description: Successful
             content:
               application/json:
                 schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Course"
+                    $ref: "#/components/schemas/CourseListResponse"
           "400":
             $ref: "#/components/responses/BadRequest"
           "401":
@@ -90,6 +88,85 @@
           "500":
             $ref: "#/components/responses/InternalServerError"
 
+    /api/courses/{id}:
+      get:
+        tags:
+          - "Courses"
+        operationId: getCourseId
+        parameters:
+          - $ref: "#/components/parameters/CourseId"
+        responses:
+          "200":
+            description: "OK"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CourseResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "404":
+            $ref: "#/components/responses/NotFound"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
+      put:
+        summary: Update course
+        description: Updates an existing course by id.
+        tags:
+          - "Courses"
+        operationId: updateCourse
+        parameters:
+          - $ref: "#/components/parameters/CourseId"
+        requestBody:
+          description: Course update request.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseUpdateRequest"
+        responses:
+          "200":
+            description: "OK"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/CourseResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "404":
+            $ref: "#/components/responses/NotFound"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
+      delete:
+        summary: Delete course
+        description: Deletes a course by id.
+        tags:
+          - "Courses"
+        operationId: deleteCourse
+        parameters:
+          - $ref: "#/components/parameters/CourseId"
+        responses:
+          "204":
+            description: "No Content"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "404":
+            $ref: "#/components/responses/NotFound"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
 
   components:
     parameters:
@@ -98,15 +175,6 @@
         in: path
         required: true
         description: "UrL Course ID"
-        schema:
-          type: integer
-          format: int64
-
-      TeacherId:
-        name: id
-        in: path
-        required: true
-        description: "UrL Teacher ID"
         schema:
           type: integer
           format: int64
@@ -174,6 +242,8 @@
         properties:
           title:
             type: string
+            minLength: 1
+            maxLength: 255
           description:
             type: string
           priceAmount:
@@ -187,6 +257,15 @@
         properties:
           data:
             $ref: '#/components/schemas/Course'
+
+      CourseListResponse:
+        type: object
+        required: [data]
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/components/schemas/Course"
 
       Student:
         type: object
@@ -202,6 +281,25 @@
             type: string
             format: date-time
 
+      CourseUpdateRequest:
+        type: object
+        required:
+          - title
+        properties:
+          title:
+            type: string
+            minLength: 1
+            maxLength: 255
+          description:
+            type: string
+          priceAmount:
+            type: number
+            minimum: 0
+          teacherId:
+            type: integer
+            format: int64
+            description: "ID of the teacher if you want to change it"
+
     responses:
       BadRequest:
         description: Bad Request
@@ -213,5 +311,7 @@
         description: Internal Server Error
       SystemInfoResponse:
         description: System Info
+      NotFound:
+        description: Not Found
 
 

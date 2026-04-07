@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Teacher")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-06T18:58:22.775660600+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-08T00:12:04.302624200+03:00[Europe/Sofia]")
 public class TeacherDto {
 
   private Long id;

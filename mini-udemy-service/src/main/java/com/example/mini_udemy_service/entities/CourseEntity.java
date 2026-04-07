@@ -21,7 +21,7 @@ public class CourseEntity {
 
     private  String description;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "price_id")
     private  PriceEntity price;
 
