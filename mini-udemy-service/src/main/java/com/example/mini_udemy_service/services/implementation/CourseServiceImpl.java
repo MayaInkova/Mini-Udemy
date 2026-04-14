@@ -13,6 +13,7 @@ import com.example.mini_udemy_service.services.util.ErrorMessages;
 import com.udemy.mini.model.CourseCreateRequestDto;
 import com.udemy.mini.model.CourseListResponseDto;
 import com.udemy.mini.model.CourseResponseDto;
+import com.udemy.mini.model.CourseUpdateRequestDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,6 @@ public  class CourseServiceImpl  implements CourseService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         CourseEntity courseEntity = courseMapper.toEntity(req);
-
-        courseEntity.setPrice(priceMapper.toEntity(req));
 
         PriceEntity price = priceMapper.toEntity(req);
         price.setCurrency(Constants.DEFAULT_CURRENCY);
@@ -89,6 +88,19 @@ public  class CourseServiceImpl  implements CourseService {
 
         courseRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public  CourseResponseDto updateCourse(Long id, CourseUpdateRequestDto updateDto){
+        CourseEntity courseEntity = courseRepository.findById(id)
+                .orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND,ErrorMessages.COURSE_NOT_FOUND.formatted(id)));
+
+                courseEntity.setTitle(updateDto.getTitle());
+                courseEntity.setDescription(updateDto.getDescription());
+
+                return  courseMapper.toDto(courseRepository.save(courseEntity));
+    }
+
 }
 
 

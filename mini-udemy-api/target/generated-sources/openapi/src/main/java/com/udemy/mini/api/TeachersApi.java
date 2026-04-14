@@ -5,10 +5,10 @@
  */
 package com.udemy.mini.api;
 
-import com.udemy.mini.model.CourseCreateRequestDto;
-import com.udemy.mini.model.CourseListResponseDto;
-import com.udemy.mini.model.CourseResponseDto;
-import com.udemy.mini.model.CourseUpdateRequestDto;
+import com.udemy.mini.model.TeacherCreateRequestDto;
+import com.udemy.mini.model.TeacherListResponseDto;
+import com.udemy.mini.model.TeacherResponseDto;
+import com.udemy.mini.model.TeacherUpdateRequestDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -37,17 +37,17 @@ import jakarta.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-14T19:54:56.544927100+03:00[Europe/Sofia]")
 @Validated
-@Tag(name = "Courses", description = "the Courses API")
-public interface CoursesApi {
+@Tag(name = "Teachers", description = "the Teachers API")
+public interface TeachersApi {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
 
     /**
-     * POST /api/courses : Create new course
+     * POST /api/teacher : Create new teacher
      *
-     * @param courseCreateRequestDto  (required)
+     * @param teacherCreateRequestDto  (required)
      * @return Course is create (status code 201)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
@@ -55,12 +55,12 @@ public interface CoursesApi {
      *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "createCourse",
-        summary = "Create new course",
-        tags = { "Courses" },
+        operationId = "createTeacher",
+        summary = "Create new teacher",
+        tags = { "Teachers" },
         responses = {
             @ApiResponse(responseCode = "201", description = "Course is create", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherResponseDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -70,18 +70,18 @@ public interface CoursesApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/api/courses",
+        value = "/api/teacher",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<CourseResponseDto> createCourse(
-        @Parameter(name = "CourseCreateRequestDto", description = "", required = true) @Valid @RequestBody CourseCreateRequestDto courseCreateRequestDto
+    default ResponseEntity<TeacherResponseDto> createTeacher(
+        @Parameter(name = "TeacherCreateRequestDto", description = "", required = true) @Valid @RequestBody TeacherCreateRequestDto teacherCreateRequestDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
+                    String exampleString = "{ \"data\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -93,85 +93,7 @@ public interface CoursesApi {
 
 
     /**
-     * DELETE /api/courses/{id} : Delete course
-     * Deletes a course by id.
-     *
-     * @param id UrL Course ID (required)
-     * @return No Content (status code 204)
-     *         or Bad Request (status code 400)
-     *         or Unauthorized (status code 401)
-     *         or Forbidden (status code 403)
-     *         or Not Found (status code 404)
-     *         or Internal Server Error (status code 500)
-     */
-    @Operation(
-        operationId = "deleteCourse",
-        summary = "Delete course",
-        description = "Deletes a course by id.",
-        tags = { "Courses" },
-        responses = {
-            @ApiResponse(responseCode = "204", description = "No Content"),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
-            @ApiResponse(responseCode = "404", description = "Not Found"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/api/courses/{id}"
-    )
-    
-    default ResponseEntity<Void> deleteCourse(
-        @Parameter(name = "id", description = "UrL Course ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * DELETE /api/teacher/{id} : Delete teacher
-     * Deletes a teacher by id.
-     *
-     * @param id UrL TeacherId ID (required)
-     * @return No Content (status code 204)
-     *         or Bad Request (status code 400)
-     *         or Unauthorized (status code 401)
-     *         or Forbidden (status code 403)
-     *         or Not Found (status code 404)
-     *         or Internal Server Error (status code 500)
-     */
-    @Operation(
-        operationId = "deleteTeacher",
-        summary = "Delete teacher",
-        description = "Deletes a teacher by id.",
-        tags = { "Courses" },
-        responses = {
-            @ApiResponse(responseCode = "204", description = "No Content"),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
-            @ApiResponse(responseCode = "404", description = "Not Found"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/api/teacher/{id}"
-    )
-    
-    default ResponseEntity<Void> deleteTeacher(
-        @Parameter(name = "id", description = "UrL TeacherId ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /api/courses : List with very courses
+     * GET /api/teacher : List with very teacher
      *
      * @return Successful (status code 200)
      *         or Bad Request (status code 400)
@@ -180,12 +102,12 @@ public interface CoursesApi {
      *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "getAllCourses",
-        summary = "List with very courses",
-        tags = { "Courses" },
+        operationId = "getAllTeacher",
+        summary = "List with very teacher",
+        tags = { "Teachers" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Successful", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseListResponseDto.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherListResponseDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -195,17 +117,17 @@ public interface CoursesApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/courses",
+        value = "/api/teacher",
         produces = { "application/json" }
     )
     
-    default ResponseEntity<CourseListResponseDto> getAllCourses(
+    default ResponseEntity<TeacherListResponseDto> getAllTeacher(
         
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ] }";
+                    String exampleString = "{ \"data\" : [ { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -217,9 +139,9 @@ public interface CoursesApi {
 
 
     /**
-     * GET /api/courses/{id}
+     * GET /api/teacher/{id}
      *
-     * @param id UrL Course ID (required)
+     * @param id UrL TeacherId ID (required)
      * @return OK (status code 200)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
@@ -228,11 +150,11 @@ public interface CoursesApi {
      *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "getCourseId",
-        tags = { "Courses" },
+        operationId = "getTeacherId",
+        tags = { "Teachers" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherResponseDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -243,17 +165,17 @@ public interface CoursesApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/api/courses/{id}",
+        value = "/api/teacher/{id}",
         produces = { "application/json" }
     )
     
-    default ResponseEntity<CourseResponseDto> getCourseId(
-        @Parameter(name = "id", description = "UrL Course ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+    default ResponseEntity<TeacherResponseDto> getTeacherId(
+        @Parameter(name = "id", description = "UrL TeacherId ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
+                    String exampleString = "{ \"data\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -265,11 +187,11 @@ public interface CoursesApi {
 
 
     /**
-     * PUT /api/courses/{id} : Update course
-     * Updates an existing course by id.
+     * PUT /api/teacher/{id} : Update teacher
+     * Updates an existing teacher by id.
      *
-     * @param id UrL Course ID (required)
-     * @param courseUpdateRequestDto Course update request. (required)
+     * @param id UrL TeacherId ID (required)
+     * @param teacherUpdateRequestDto Teacher update request. (required)
      * @return OK (status code 200)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
@@ -278,13 +200,13 @@ public interface CoursesApi {
      *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "updateCourse",
-        summary = "Update course",
-        description = "Updates an existing course by id.",
-        tags = { "Courses" },
+        operationId = "updateTeacher",
+        summary = "Update teacher",
+        description = "Updates an existing teacher by id.",
+        tags = { "Teachers" },
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CourseResponseDto.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherResponseDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request"),
             @ApiResponse(responseCode = "401", description = "Unauthorized"),
@@ -295,19 +217,19 @@ public interface CoursesApi {
     )
     @RequestMapping(
         method = RequestMethod.PUT,
-        value = "/api/courses/{id}",
+        value = "/api/teacher/{id}",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<CourseResponseDto> updateCourse(
-        @Parameter(name = "id", description = "UrL Course ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id,
-        @Parameter(name = "CourseUpdateRequestDto", description = "Course update request.", required = true) @Valid @RequestBody CourseUpdateRequestDto courseUpdateRequestDto
+    default ResponseEntity<TeacherResponseDto> updateTeacher(
+        @Parameter(name = "id", description = "UrL TeacherId ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id,
+        @Parameter(name = "TeacherUpdateRequestDto", description = "Teacher update request.", required = true) @Valid @RequestBody TeacherUpdateRequestDto teacherUpdateRequestDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } }";
+                    String exampleString = "{ \"data\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

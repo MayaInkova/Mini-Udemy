@@ -10,6 +10,7 @@
 
   tags:
     - name: Courses
+    - name: Teachers
 
   paths:
 
@@ -168,6 +169,135 @@
           "500":
             $ref: "#/components/responses/InternalServerError"
 
+    /api/teacher:
+      get:
+        tags:
+          - Teachers
+        summary: List with very teacher
+        operationId: getAllTeacher
+        responses:
+          "200":
+            description: Successful
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/TeacherListResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
+      post:
+        tags:
+          - "Teachers"
+        summary: Create new teacher
+        operationId: createTeacher
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeacherCreateRequest"
+        responses:
+          "201":
+            description: Course is create
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/TeacherResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
+    /api/teacher/{id}:
+      get:
+        tags:
+          - "Teachers"
+        operationId: getTeacherId
+        parameters:
+          - $ref: "#/components/parameters/TeacherId"
+        responses:
+          "200":
+            description: "OK"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/TeacherResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "404":
+            $ref: "#/components/responses/NotFound"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
+      put:
+        summary: Update teacher
+        description: Updates an existing teacher by id.
+        tags:
+          - "Teachers"
+        operationId: updateTeacher
+        parameters:
+          - $ref: "#/components/parameters/TeacherId"
+        requestBody:
+          description: Teacher update request.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeacherUpdateRequest"
+        responses:
+          "200":
+            description: "OK"
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/TeacherResponse"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "404":
+            $ref: "#/components/responses/NotFound"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
+      delete:
+        summary: Delete teacher
+        description: Deletes a teacher by id.
+        tags:
+          - "Courses"
+        operationId: deleteTeacher
+        parameters:
+          - $ref: "#/components/parameters/TeacherId"
+        responses:
+          "204":
+            description: "No Content"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "404":
+            $ref: "#/components/responses/NotFound"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
+
   components:
     parameters:
       CourseId:
@@ -175,6 +305,15 @@
         in: path
         required: true
         description: "UrL Course ID"
+        schema:
+          type: integer
+          format: int64
+
+      TeacherId:
+        name: id
+        in: path
+        required: true
+        description: "UrL TeacherId ID"
         schema:
           type: integer
           format: int64
@@ -299,6 +438,50 @@
             type: integer
             format: int64
             description: "ID of the teacher if you want to change it"
+
+      TeacherCreateRequest:
+        type: object
+        required:
+          - fullName
+        properties:
+          fullName:
+            type: string
+            minLength: 1
+            maxLength: 255
+          email:
+            type: string
+          bio:
+            type: string
+
+      TeacherResponse:
+        type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Teacher'
+
+      TeacherListResponse:
+        type: object
+        required: [ data ]
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/components/schemas/Teacher"
+
+
+      TeacherUpdateRequest:
+        type: object
+        required:
+          - fullName
+        properties:
+          fullName:
+            type: string
+            minLength: 1
+            maxLength: 255
+          email:
+            type: string
+          bio:
+            type: string
 
     responses:
       BadRequest:

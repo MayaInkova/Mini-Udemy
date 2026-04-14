@@ -4,6 +4,7 @@ import com.udemy.mini.api.CoursesApi;
 import com.udemy.mini.model.CourseCreateRequestDto;
 import com.udemy.mini.model.CourseListResponseDto;
 import com.udemy.mini.model.CourseResponseDto;
+import com.udemy.mini.model.CourseUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class CourseController implements CoursesApi {
+public class
+CourseController implements CoursesApi {
 
     private final CourseService courseService;
 
@@ -36,5 +38,10 @@ public class CourseController implements CoursesApi {
     public ResponseEntity<Void> deleteCourse(Long id) {
         courseService.deleteCourse(id);
         return  ResponseEntity.noContent().build();
+    }
+    @Override
+    public  ResponseEntity<CourseResponseDto> updateCourse(Long id, CourseUpdateRequestDto courseUpdateRequestDto){
+        CourseResponseDto updateCourse = courseService.updateCourse(id, courseUpdateRequestDto);
+        return ResponseEntity.ok(updateCourse);
     }
 }

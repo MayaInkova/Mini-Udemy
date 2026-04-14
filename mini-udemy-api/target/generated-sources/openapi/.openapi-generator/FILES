@@ -4,6 +4,7 @@ pom.xml
 src/main/java/com/udemy/mini/api/ApiUtil.java
 src/main/java/com/udemy/mini/api/CoursesApi.java
 src/main/java/com/udemy/mini/api/SystemApi.java
+src/main/java/com/udemy/mini/api/TeachersApi.java
 src/main/java/com/udemy/mini/model/CourseCreateRequestDto.java
 src/main/java/com/udemy/mini/model/CourseDto.java
 src/main/java/com/udemy/mini/model/CourseListResponseDto.java
@@ -12,4 +13,8 @@ src/main/java/com/udemy/mini/model/CourseUpdateRequestDto.java
 src/main/java/com/udemy/mini/model/EnrollmentDto.java
 src/main/java/com/udemy/mini/model/PriceDto.java
 src/main/java/com/udemy/mini/model/StudentDto.java
+src/main/java/com/udemy/mini/model/TeacherCreateRequestDto.java
 src/main/java/com/udemy/mini/model/TeacherDto.java
+src/main/java/com/udemy/mini/model/TeacherListResponseDto.java
+src/main/java/com/udemy/mini/model/TeacherResponseDto.java
+src/main/java/com/udemy/mini/model/TeacherUpdateRequestDto.java
