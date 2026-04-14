@@ -16,14 +16,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * TeacherDto
+ * TeacherCreateRequestDto
  */
 
-@JsonTypeName("Teacher")
+@JsonTypeName("TeacherCreateRequest")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-14T19:54:56.544927100+03:00[Europe/Sofia]")
-public class TeacherDto {
-
-  private Long id;
+public class TeacherCreateRequestDto {
 
   private String fullName;
 
@@ -31,27 +29,18 @@ public class TeacherDto {
 
   private String bio;
 
-  public TeacherDto id(Long id) {
-    this.id = id;
-    return this;
+  public TeacherCreateRequestDto() {
+    super();
   }
 
   /**
-   * Get id
-   * @return id
-  */
-  
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public Long getId() {
-    return id;
+   * Constructor with only required parameters
+   */
+  public TeacherCreateRequestDto(String fullName) {
+    this.fullName = fullName;
   }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public TeacherDto fullName(String fullName) {
+  public TeacherCreateRequestDto fullName(String fullName) {
     this.fullName = fullName;
     return this;
   }
@@ -60,8 +49,8 @@ public class TeacherDto {
    * Get fullName
    * @return fullName
   */
-  
-  @Schema(name = "fullName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull @Size(min = 1, max = 255) 
+  @Schema(name = "fullName", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("fullName")
   public String getFullName() {
     return fullName;
@@ -71,7 +60,7 @@ public class TeacherDto {
     this.fullName = fullName;
   }
 
-  public TeacherDto email(String email) {
+  public TeacherCreateRequestDto email(String email) {
     this.email = email;
     return this;
   }
@@ -91,7 +80,7 @@ public class TeacherDto {
     this.email = email;
   }
 
-  public TeacherDto bio(String bio) {
+  public TeacherCreateRequestDto bio(String bio) {
     this.bio = bio;
     return this;
   }
@@ -119,23 +108,21 @@ public class TeacherDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TeacherDto teacher = (TeacherDto) o;
-    return Objects.equals(this.id, teacher.id) &&
-        Objects.equals(this.fullName, teacher.fullName) &&
-        Objects.equals(this.email, teacher.email) &&
-        Objects.equals(this.bio, teacher.bio);
+    TeacherCreateRequestDto teacherCreateRequest = (TeacherCreateRequestDto) o;
+    return Objects.equals(this.fullName, teacherCreateRequest.fullName) &&
+        Objects.equals(this.email, teacherCreateRequest.email) &&
+        Objects.equals(this.bio, teacherCreateRequest.bio);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fullName, email, bio);
+    return Objects.hash(fullName, email, bio);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TeacherDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("class TeacherCreateRequestDto {\n");
     sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    bio: ").append(toIndentedString(bio)).append("\n");

@@ -5,7 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.udemy.mini.model.CourseDto;
+import com.udemy.mini.model.TeacherDto;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -17,16 +17,16 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * CourseResponseDto
+ * TeacherResponseDto
  */
 
-@JsonTypeName("CourseResponse")
+@JsonTypeName("TeacherResponse")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-14T19:54:56.544927100+03:00[Europe/Sofia]")
-public class CourseResponseDto {
+public class TeacherResponseDto {
 
-  private CourseDto data;
+  private TeacherDto data;
 
-  public CourseResponseDto data(CourseDto data) {
+  public TeacherResponseDto data(TeacherDto data) {
     this.data = data;
     return this;
   }
@@ -38,11 +38,11 @@ public class CourseResponseDto {
   @Valid 
   @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("data")
-  public CourseDto getData() {
+  public TeacherDto getData() {
     return data;
   }
 
-  public void setData(CourseDto data) {
+  public void setData(TeacherDto data) {
     this.data = data;
   }
 
@@ -54,8 +54,8 @@ public class CourseResponseDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CourseResponseDto courseResponse = (CourseResponseDto) o;
-    return Objects.equals(this.data, courseResponse.data);
+    TeacherResponseDto teacherResponse = (TeacherResponseDto) o;
+    return Objects.equals(this.data, teacherResponse.data);
   }
 
   @Override
@@ -66,7 +66,7 @@ public class CourseResponseDto {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CourseResponseDto {\n");
+    sb.append("class TeacherResponseDto {\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
