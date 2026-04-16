@@ -5,10 +5,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.udemy.mini.model.TeacherDto;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.udemy.mini.model.ErrorDataDto;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -20,53 +17,45 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * TeacherListResponseDto
+ * RFC7807-compliant error wrapper.
  */
 
-@JsonTypeName("TeacherListResponse")
+@Schema(name = "ErrorResponse", description = "RFC7807-compliant error wrapper.")
+@JsonTypeName("ErrorResponse")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-16T16:15:57.078087800+03:00[Europe/Sofia]")
-public class TeacherListResponseDto {
+public class ErrorResponseDto {
 
-  @Valid
-  private List<@Valid TeacherDto> data = new ArrayList<>();
+  private ErrorDataDto error;
 
-  public TeacherListResponseDto() {
+  public ErrorResponseDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public TeacherListResponseDto(List<@Valid TeacherDto> data) {
-    this.data = data;
+  public ErrorResponseDto(ErrorDataDto error) {
+    this.error = error;
   }
 
-  public TeacherListResponseDto data(List<@Valid TeacherDto> data) {
-    this.data = data;
-    return this;
-  }
-
-  public TeacherListResponseDto addDataItem(TeacherDto dataItem) {
-    if (this.data == null) {
-      this.data = new ArrayList<>();
-    }
-    this.data.add(dataItem);
+  public ErrorResponseDto error(ErrorDataDto error) {
+    this.error = error;
     return this;
   }
 
   /**
-   * Get data
-   * @return data
+   * Get error
+   * @return error
   */
   @NotNull @Valid 
-  @Schema(name = "data", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("data")
-  public List<@Valid TeacherDto> getData() {
-    return data;
+  @Schema(name = "error", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("error")
+  public ErrorDataDto getError() {
+    return error;
   }
 
-  public void setData(List<@Valid TeacherDto> data) {
-    this.data = data;
+  public void setError(ErrorDataDto error) {
+    this.error = error;
   }
 
   @Override
@@ -77,20 +66,20 @@ public class TeacherListResponseDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TeacherListResponseDto teacherListResponse = (TeacherListResponseDto) o;
-    return Objects.equals(this.data, teacherListResponse.data);
+    ErrorResponseDto errorResponse = (ErrorResponseDto) o;
+    return Objects.equals(this.error, errorResponse.error);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(error);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TeacherListResponseDto {\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("class ErrorResponseDto {\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("}");
     return sb.toString();
   }
