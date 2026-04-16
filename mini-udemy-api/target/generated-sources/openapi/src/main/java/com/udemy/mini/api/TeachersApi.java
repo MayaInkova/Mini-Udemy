@@ -5,6 +5,7 @@
  */
 package com.udemy.mini.api;
 
+import com.udemy.mini.model.ErrorResponseDto;
 import com.udemy.mini.model.TeacherCreateRequestDto;
 import com.udemy.mini.model.TeacherListResponseDto;
 import com.udemy.mini.model.TeacherResponseDto;
@@ -35,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-14T19:54:56.544927100+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-16T16:15:57.078087800+03:00[Europe/Sofia]")
 @Validated
 @Tag(name = "Teachers", description = "the Teachers API")
 public interface TeachersApi {
@@ -62,9 +63,15 @@ public interface TeachersApi {
             @ApiResponse(responseCode = "201", description = "Course is create", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherResponseDto.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )
@@ -93,6 +100,54 @@ public interface TeachersApi {
 
 
     /**
+     * DELETE /api/teacher/{id} : Delete teacher
+     * Deletes a teacher by id.
+     *
+     * @param id UrL TeacherId ID (required)
+     * @return No Content (status code 204)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Not Found (status code 404)
+     *         or Internal Server Error (status code 500)
+     */
+    @Operation(
+        operationId = "deleteTeacher",
+        summary = "Delete teacher",
+        description = "Deletes a teacher by id.",
+        tags = { "Teachers" },
+        responses = {
+            @ApiResponse(responseCode = "204", description = "No Content"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/api/teacher/{id}",
+        produces = { "application/json" }
+    )
+    
+    default ResponseEntity<Void> deleteTeacher(
+        @Parameter(name = "id", description = "UrL TeacherId ID", required = true, in = ParameterIn.PATH) @PathVariable("id") Long id
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
      * GET /api/teacher : List with very teacher
      *
      * @return Successful (status code 200)
@@ -109,9 +164,15 @@ public interface TeachersApi {
             @ApiResponse(responseCode = "200", description = "Successful", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherListResponseDto.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )
@@ -156,10 +217,18 @@ public interface TeachersApi {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherResponseDto.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
-            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )
@@ -208,10 +277,18 @@ public interface TeachersApi {
             @ApiResponse(responseCode = "200", description = "OK", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = TeacherResponseDto.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Bad Request"),
-            @ApiResponse(responseCode = "401", description = "Unauthorized"),
-            @ApiResponse(responseCode = "403", description = "Forbidden"),
-            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )

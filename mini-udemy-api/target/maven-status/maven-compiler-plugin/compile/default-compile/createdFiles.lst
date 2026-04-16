@@ -3,6 +3,8 @@ com\udemy\mini\model\StudentDto.class
 com\udemy\mini\model\TeacherDto.class
 com\udemy\mini\model\CourseListResponseDto.class
 com\udemy\mini\model\EnrollmentDto.class
+com\udemy\mini\model\ErrorDataDto.class
+com\udemy\mini\model\ErrorResponseDto.class
 com\udemy\mini\model\TeacherResponseDto.class
 com\udemy\mini\model\TeacherCreateRequestDto.class
 com\udemy\mini\model\TeacherListResponseDto.class

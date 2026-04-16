@@ -11,6 +11,8 @@ src/main/java/com/udemy/mini/model/CourseListResponseDto.java
 src/main/java/com/udemy/mini/model/CourseResponseDto.java
 src/main/java/com/udemy/mini/model/CourseUpdateRequestDto.java
 src/main/java/com/udemy/mini/model/EnrollmentDto.java
+src/main/java/com/udemy/mini/model/ErrorDataDto.java
+src/main/java/com/udemy/mini/model/ErrorResponseDto.java
 src/main/java/com/udemy/mini/model/PriceDto.java
 src/main/java/com/udemy/mini/model/StudentDto.java
 src/main/java/com/udemy/mini/model/TeacherCreateRequestDto.java

@@ -24,7 +24,7 @@ CourseController implements CoursesApi {
     }
 
     @Override
-    public ResponseEntity<CourseListResponseDto> getAllCourses() {
+    public ResponseEntity<CourseListResponseDto>getAllCourses(){
         var response = courseService.getAllCourses();
         return ResponseEntity.ok(response);
     }
@@ -34,14 +34,15 @@ CourseController implements CoursesApi {
         var response = courseService.getCourseId(id);
         return ResponseEntity.ok(response);
     }
-    @Override
-    public ResponseEntity<Void> deleteCourse(Long id) {
+   @Override
+    public ResponseEntity<Void>deleteCourse(Long id){
         courseService.deleteCourse(id);
-        return  ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
+
     }
     @Override
     public  ResponseEntity<CourseResponseDto> updateCourse(Long id, CourseUpdateRequestDto courseUpdateRequestDto){
-        CourseResponseDto updateCourse = courseService.updateCourse(id, courseUpdateRequestDto);
-        return ResponseEntity.ok(updateCourse);
+        var response = courseService.updateCourse(id, courseUpdateRequestDto);
+        return ResponseEntity.ok(response);
     }
 }

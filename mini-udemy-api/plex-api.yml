@@ -280,7 +280,7 @@
         summary: Delete teacher
         description: Deletes a teacher by id.
         tags:
-          - "Courses"
+          - "Teachers"
         operationId: deleteTeacher
         parameters:
           - $ref: "#/components/parameters/TeacherId"
@@ -482,19 +482,70 @@
             type: string
           bio:
             type: string
+      ErrorResponse:
+        description: RFC7807-compliant error wrapper.
+        type: object
+        required:
+          - error
+        properties:
+          error:
+            $ref: "#/components/schemas/ErrorData"
+
+      ErrorData:
+        type: object
+        required:
+          - type
+          - title
+          - status
+          - detail
+        properties:
+          type:
+            type: string
+            description: A URI reference that identifies the problem type.
+          title:
+            type: string
+            description: Short, human-readable summary of the problem type.
+          status:
+            type: integer
+            description: HTTP status code.
+          detail:
+            type: string
+            description: Human-readable explanation specific to this occurrence.
+
+
 
     responses:
       BadRequest:
         description: Bad Request
+        content:
+          application/json:
+            schema:
+             $ref: "#/components/schemas/ErrorResponse"
+
       Unauthorized:
         description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
       Forbidden:
         description: Forbidden
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
       InternalServerError:
         description: Internal Server Error
       SystemInfoResponse:
         description: System Info
       NotFound:
         description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+
+
 
 
