@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
 
 @Schema(name = "ErrorResponse", description = "RFC7807-compliant error wrapper.")
 @JsonTypeName("ErrorResponse")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-21T12:52:01.859018900+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-23T19:19:30.819979600+03:00[Europe/Sofia]")
 public class ErrorResponseDto {
 
   private ErrorDataDto error;

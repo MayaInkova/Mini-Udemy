@@ -16,11 +16,15 @@ import com.udemy.mini.model.CourseCreateRequestDto;
 import com.udemy.mini.model.CourseListResponseDto;
 import com.udemy.mini.model.CourseResponseDto;
 import com.udemy.mini.model.CourseUpdateRequestDto;
+import org.springframework.data.domain.Pageable;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
 
 @Service
@@ -61,19 +65,24 @@ public  class CourseServiceImpl  implements CourseService {
     }
 
     @Override
-    public CourseListResponseDto getAllCourses() {
+    public CourseListResponseDto getAllCourses(Integer size, Integer page, List<String> sort, List<String> filter) {
 
-        var allCourses = courseRepository.findAll();
+        Specification<CourseEntity> spec = (root, query, cd) -> {
+            if (filter == null || filter.isEmpty()) return null;
+            return cd.like(root.get("title"), "%" + filter.get(0) + "%");
 
-        var dtos = allCourses.stream()
+        };
+        Pageable pageable = PageRequest.of(page, size);
+
+        var coursePage = courseRepository.findAll(spec, pageable);
+
+        var dtos = coursePage.getContent().stream()
                 .map(courseMapper::toCourseDto)
                 .toList();
+        return new CourseListResponseDto().data(dtos);
 
-        CourseListResponseDto response = new CourseListResponseDto();
-        response.setData(dtos);
-
-        return response;
     }
+
 
     @Override
     public CourseResponseDto getCourseId(Long id) {

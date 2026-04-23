@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-21T12:52:01.859018900+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-23T19:19:30.819979600+03:00[Europe/Sofia]")
 @Validated
 @Tag(name = "Courses", description = "the Courses API")
 public interface CoursesApi {
@@ -150,6 +150,10 @@ public interface CoursesApi {
     /**
      * GET /api/courses : List with very courses
      *
+     * @param size The number of items to be return (optional, default to 20)
+     * @param page The page number for pagination (optional, default to 0)
+     * @param sort Sorting criteria in the format (optional)
+     * @param filter Filter criteria to narrow (optional)
      * @return Successful (status code 200)
      *         or Bad Request (status code 400)
      *         or Unauthorized (status code 401)
@@ -183,12 +187,15 @@ public interface CoursesApi {
     )
     
     default ResponseEntity<CourseListResponseDto> getAllCourses(
-        
+        @Min(1) @Parameter(name = "size", description = "The number of items to be return", in = ParameterIn.QUERY) @Valid @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
+        @Min(0) @Parameter(name = "page", description = "The page number for pagination", in = ParameterIn.QUERY) @Valid @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+        @Parameter(name = "sort", description = "Sorting criteria in the format", in = ParameterIn.QUERY) @Valid @RequestParam(value = "sort", required = false) List<String> sort,
+        @Parameter(name = "filter", description = "Filter criteria to narrow", in = ParameterIn.QUERY) @Valid @RequestParam(value = "filter", required = false) List<String> filter
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ] }";
+                    String exampleString = "{ \"data\" : [ { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" }, { \"teacher\" : { \"fullName\" : \"fullName\", \"bio\" : \"bio\", \"id\" : 5, \"email\" : \"email\" }, \"price\" : { \"amount\" : 1.4658129805029452, \"currency\" : \"currency\", \"id\" : 6 }, \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\" } ], \"totalPages\" : 2, \"currentPage\" : 7, \"totalElements\" : 5 }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
