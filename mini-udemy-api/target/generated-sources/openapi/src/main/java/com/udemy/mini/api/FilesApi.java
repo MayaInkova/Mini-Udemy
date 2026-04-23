@@ -5,6 +5,7 @@
  */
 package com.udemy.mini.api;
 
+import com.udemy.mini.model.ErrorResponseDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -33,66 +34,52 @@ import jakarta.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-21T12:52:01.859018900+03:00[Europe/Sofia]")
 @Validated
-@Tag(name = "System", description = "the System API")
-public interface SystemApi {
+@Tag(name = "Files", description = "the Files API")
+public interface FilesApi {
 
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
 
     /**
-     * GET /api/system/health : Healthcheck
-     * Returns 200 OK for healthcheck purposes.
+     * POST /api/files : Upload file
+     * Upload SQLite
      *
-     * @return OK (status code 200)
+     * @param file  (optional)
+     * @return Accepted (status code 202)
+     *         or Bad Request (status code 400)
+     *         or Unauthorized (status code 401)
+     *         or Forbidden (status code 403)
+     *         or Internal Server Error (status code 500)
      */
     @Operation(
-        operationId = "apiSystemHealthGet",
-        summary = "Healthcheck",
-        description = "Returns 200 OK for healthcheck purposes.",
-        tags = { "System" },
+        operationId = "uploadFile",
+        summary = "Upload file",
+        description = "Upload SQLite",
+        tags = { "Files" },
         responses = {
-            @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = String.class))
-            })
+            @ApiResponse(responseCode = "202", description = "Accepted"),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "403", description = "Forbidden", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponseDto.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error")
         }
     )
     @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/api/system/health",
-        produces = { "application/json" }
+        method = RequestMethod.POST,
+        value = "/api/files",
+        produces = { "application/json" },
+        consumes = { "multipart/form-data" }
     )
     
-    default ResponseEntity<String> apiSystemHealthGet(
-        
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /api/system/info : Application version
-     * Returns current application version/build metadata.
-     *
-     * @return System Info (status code 200)
-     */
-    @Operation(
-        operationId = "apiSystemInfoGet",
-        summary = "Application version",
-        description = "Returns current application version/build metadata.",
-        tags = { "System" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "System Info")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/api/system/info"
-    )
-    
-    default ResponseEntity<Void> apiSystemInfoGet(
-        
+    default ResponseEntity<Void> uploadFile(
+        @Parameter(name = "file", description = "") @RequestPart(value = "file", required = false) MultipartFile file
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
