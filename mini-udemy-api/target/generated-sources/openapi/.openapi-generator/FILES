@@ -3,6 +3,7 @@ README.md
 pom.xml
 src/main/java/com/udemy/mini/api/ApiUtil.java
 src/main/java/com/udemy/mini/api/CoursesApi.java
+src/main/java/com/udemy/mini/api/FilesApi.java
 src/main/java/com/udemy/mini/api/SystemApi.java
 src/main/java/com/udemy/mini/api/TeachersApi.java
 src/main/java/com/udemy/mini/model/CourseCreateRequestDto.java

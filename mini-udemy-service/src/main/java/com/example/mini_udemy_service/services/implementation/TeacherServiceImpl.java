@@ -1,6 +1,8 @@
 package com.example.mini_udemy_service.services.implementation;
 
 import com.example.mini_udemy_service.entities.TeacherEntity;
+import com.example.mini_udemy_service.exceptions.handler.model.BadRequestException;
+import com.example.mini_udemy_service.exceptions.handler.model.ConflictException;
 import com.example.mini_udemy_service.mappers.TeacherMapper;
 import com.example.mini_udemy_service.repositories.TeacherRepository;
 import com.example.mini_udemy_service.services.contracts.TeacherService;
@@ -24,7 +26,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Transactional
     public TeacherResponseDto createTeacher(TeacherCreateRequestDto teacherCreateRequestDto){
         if (teacherRepository.existsByEmailIgnoreCase(teacherCreateRequestDto.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, ErrorMessages.TEACHER_ALREADY_EXISTS.formatted());
+            throw new ConflictException(ErrorMessages.TEACHER_ALREADY_EXISTS);
 
         }
 
@@ -63,7 +65,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public void  deleteTeacher(Long id){
         if (!teacherRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ErrorMessages.TEACHER_NOT_FOUND.formatted(id));
+            throw new BadRequestException(ErrorMessages.TEACHER_NOT_FOUND.formatted(id));
         }
 
         teacherRepository.deleteById(id);

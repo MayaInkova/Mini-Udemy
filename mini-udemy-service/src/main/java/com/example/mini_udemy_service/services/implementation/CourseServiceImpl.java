@@ -3,6 +3,8 @@ package com.example.mini_udemy_service.services.implementation;
 import com.example.mini_udemy_service.entities.CourseEntity;
 import com.example.mini_udemy_service.entities.PriceEntity;
 import com.example.mini_udemy_service.entities.TeacherEntity;
+import com.example.mini_udemy_service.exceptions.handler.model.BadRequestException;
+import com.example.mini_udemy_service.exceptions.handler.model.ConflictException;
 import com.example.mini_udemy_service.mappers.CourseMapper;
 import com.example.mini_udemy_service.mappers.PriceMapper;
 import com.example.mini_udemy_service.repositories.CourseRepository;
@@ -38,7 +40,7 @@ public  class CourseServiceImpl  implements CourseService {
 
 
         if (courseRepository.existsByTitleIgnoreCase(req.getTitle())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, ErrorMessages.COURSE_ALREADY_EXISTS.formatted(req.getTitle()));
+            throw new ConflictException(ErrorMessages.COURSE_ALREADY_EXISTS.formatted(req.getTitle()));
         }
 
         TeacherEntity teacher = teacherRepository.findById(req.getTeacherId())
@@ -83,7 +85,7 @@ public  class CourseServiceImpl  implements CourseService {
     @Override
     public void deleteCourse(Long id) {
         if (!courseRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ErrorMessages.COURSE_NOT_FOUND.formatted(id));
+            throw new BadRequestException(ErrorMessages.COURSE_NOT_FOUND.formatted(id));
         }
 
         courseRepository.deleteById(id);
@@ -93,7 +95,7 @@ public  class CourseServiceImpl  implements CourseService {
     @Transactional
     public  CourseResponseDto updateCourse(Long id, CourseUpdateRequestDto updateDto){
         CourseEntity courseEntity = courseRepository.findById(id)
-                .orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND,ErrorMessages.COURSE_NOT_FOUND.formatted(id)));
+                .orElseThrow(() ->  new BadRequestException(ErrorMessages.COURSE_NOT_FOUND.formatted(id)));
 
                 courseEntity.setTitle(updateDto.getTitle());
                 courseEntity.setDescription(updateDto.getDescription());

@@ -11,6 +11,7 @@
   tags:
     - name: Courses
     - name: Teachers
+    - name: Files
 
   paths:
 
@@ -297,7 +298,35 @@
             $ref: "#/components/responses/NotFound"
           "500":
             $ref: "#/components/responses/InternalServerError"
-
+    /api/files:
+      post:
+        summary: Upload file
+        description: Upload SQLite
+        tags:
+          - "Files"
+        operationId: uploadFile
+        requestBody:
+          description: The file to upload
+          required: true
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  file:
+                    type: string
+                    format:  binary
+        responses:
+          "202":
+            description: "Accepted"
+          "400":
+            $ref: "#/components/responses/BadRequest"
+          "401":
+            $ref: "#/components/responses/Unauthorized"
+          "403":
+            $ref: "#/components/responses/Forbidden"
+          "500":
+            $ref: "#/components/responses/InternalServerError"
   components:
     parameters:
       CourseId:
