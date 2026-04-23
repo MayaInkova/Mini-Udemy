@@ -24,11 +24,17 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("CourseListResponse")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-21T12:52:01.859018900+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-23T19:19:30.819979600+03:00[Europe/Sofia]")
 public class CourseListResponseDto {
 
   @Valid
   private List<@Valid CourseDto> data = new ArrayList<>();
+
+  private Long totalElements;
+
+  private Integer totalPages;
+
+  private Integer currentPage;
 
   public CourseListResponseDto() {
     super();
@@ -37,8 +43,11 @@ public class CourseListResponseDto {
   /**
    * Constructor with only required parameters
    */
-  public CourseListResponseDto(List<@Valid CourseDto> data) {
+  public CourseListResponseDto(List<@Valid CourseDto> data, Long totalElements, Integer totalPages, Integer currentPage) {
     this.data = data;
+    this.totalElements = totalElements;
+    this.totalPages = totalPages;
+    this.currentPage = currentPage;
   }
 
   public CourseListResponseDto data(List<@Valid CourseDto> data) {
@@ -69,6 +78,66 @@ public class CourseListResponseDto {
     this.data = data;
   }
 
+  public CourseListResponseDto totalElements(Long totalElements) {
+    this.totalElements = totalElements;
+    return this;
+  }
+
+  /**
+   * Get totalElements
+   * @return totalElements
+  */
+  @NotNull 
+  @Schema(name = "totalElements", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("totalElements")
+  public Long getTotalElements() {
+    return totalElements;
+  }
+
+  public void setTotalElements(Long totalElements) {
+    this.totalElements = totalElements;
+  }
+
+  public CourseListResponseDto totalPages(Integer totalPages) {
+    this.totalPages = totalPages;
+    return this;
+  }
+
+  /**
+   * Get totalPages
+   * @return totalPages
+  */
+  @NotNull 
+  @Schema(name = "totalPages", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("totalPages")
+  public Integer getTotalPages() {
+    return totalPages;
+  }
+
+  public void setTotalPages(Integer totalPages) {
+    this.totalPages = totalPages;
+  }
+
+  public CourseListResponseDto currentPage(Integer currentPage) {
+    this.currentPage = currentPage;
+    return this;
+  }
+
+  /**
+   * Get currentPage
+   * @return currentPage
+  */
+  @NotNull 
+  @Schema(name = "currentPage", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("currentPage")
+  public Integer getCurrentPage() {
+    return currentPage;
+  }
+
+  public void setCurrentPage(Integer currentPage) {
+    this.currentPage = currentPage;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -78,12 +147,15 @@ public class CourseListResponseDto {
       return false;
     }
     CourseListResponseDto courseListResponse = (CourseListResponseDto) o;
-    return Objects.equals(this.data, courseListResponse.data);
+    return Objects.equals(this.data, courseListResponse.data) &&
+        Objects.equals(this.totalElements, courseListResponse.totalElements) &&
+        Objects.equals(this.totalPages, courseListResponse.totalPages) &&
+        Objects.equals(this.currentPage, courseListResponse.currentPage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data);
+    return Objects.hash(data, totalElements, totalPages, currentPage);
   }
 
   @Override
@@ -91,6 +163,9 @@ public class CourseListResponseDto {
     StringBuilder sb = new StringBuilder();
     sb.append("class CourseListResponseDto {\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
+    sb.append("    totalElements: ").append(toIndentedString(totalElements)).append("\n");
+    sb.append("    totalPages: ").append(toIndentedString(totalPages)).append("\n");
+    sb.append("    currentPage: ").append(toIndentedString(currentPage)).append("\n");
     sb.append("}");
     return sb.toString();
   }

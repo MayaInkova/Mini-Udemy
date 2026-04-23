@@ -47,6 +47,11 @@
           - Courses
         summary: List with very courses
         operationId: getAllCourses
+        parameters:
+          - $ref: "#/components/parameters/SizeParam"
+          - $ref: "#/components/parameters/PageParam"
+          - $ref: "#/components/parameters/SortParam"
+          - $ref: "#/components/parameters/FilterParam"
         responses:
           "200":
             description: Successful
@@ -347,6 +352,48 @@
           type: integer
           format: int64
 
+      PageParam:
+        in: query
+        name: page
+        description: The page number for pagination
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+          minimum: 0
+
+      SizeParam:
+        in: query
+        name: size
+        description: The number of items to be return
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 20
+          minimum: 1
+
+      FilterParam:
+        in: query
+        name: filter
+        description: Filter criteria to narrow
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+
+      SortParam:
+        in: query
+        name: sort
+        description: Sorting criteria in the format
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+
     schemas:
       Teacher:
         type: object
@@ -428,12 +475,21 @@
 
       CourseListResponse:
         type: object
-        required: [data]
+        required: [data,totalElements, totalPages, currentPage]
         properties:
           data:
             type: array
             items:
               $ref: "#/components/schemas/Course"
+          totalElements:
+            type: integer
+            format: int64
+          totalPages:
+            type: integer
+            format: int32
+          currentPage:
+            type: integer
+            format: int32
 
       Student:
         type: object

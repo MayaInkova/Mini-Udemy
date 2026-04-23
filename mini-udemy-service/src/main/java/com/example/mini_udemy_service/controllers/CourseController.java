@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class
@@ -24,8 +26,8 @@ CourseController implements CoursesApi {
     }
 
     @Override
-    public ResponseEntity<CourseListResponseDto>getAllCourses(){
-        var response = courseService.getAllCourses();
+    public ResponseEntity<CourseListResponseDto>getAllCourses(Integer page, Integer size, List<String>sort, List<String>filter){
+        var response = courseService.getAllCourses(page, size ,sort, filter);
         return ResponseEntity.ok(response);
     }
 

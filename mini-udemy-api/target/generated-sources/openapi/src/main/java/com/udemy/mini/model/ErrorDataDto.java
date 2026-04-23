@@ -20,7 +20,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("ErrorData")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-21T12:52:01.859018900+03:00[Europe/Sofia]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-04-23T19:19:30.819979600+03:00[Europe/Sofia]")
 public class ErrorDataDto {
 
   private String type;
